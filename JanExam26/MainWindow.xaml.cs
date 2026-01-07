@@ -54,25 +54,45 @@ namespace JanExam26
             return $"{RobotName}";
         }
 
-        public enum Position
+        public enum HouseholdSkill { Cooking, Cleaning, Laundry, Gardening, ChildCare }
+        public enum DeliveryMode { Walking, Driving, Flying }
+
+
+        
+
+
+
+
+
+    }
+
+    class HouseholdRobot : Robot
+    {
+        private List<HouseholdSkill> Skills { get; set; }
+
+        public HouseholdRobot(string robotName, double powerCapacityKWH, double currentPowerKWH, HouseholdSkill skill)
+            : base(robotName, powerCapacityKWH, currentPowerKWH)
         {
-            Goalkeeper,
-            Defender,
-            Midfielder,
-            Forward
+            Skills.Add(skill);
         }
 
-        public enum Position
+        public override string DescribeRobot()
         {
-            Goalkeeper,
-            Defender,
-            Midfielder,
-            Forward
+            string skills = "";
+            foreach (HouseholdSkill skill in Skills) 
+            {
+                skills += skill.ToString() + "\n";
+            }
+            return $"I am a household robot.\nI can help with chores around the house.\n\nHousehold robot skills:\n{skills}\n{DisplayBatteryInformation()}";
         }
 
 
+    }
 
-
+    class DeliveryRobot : Robot
+    {
+        DeliveryMode ModeOfDelivery {  get; set; }
+        double MaxLoadKG { get; set; }
 
     }
 }
