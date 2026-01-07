@@ -56,7 +56,7 @@ namespace JanExam26
 
     class HouseholdRobot : Robot
     {
-        private List<HouseholdSkill>? Skills { get; set; }
+        private List<HouseholdSkill> Skills { get; set; } = new List<HouseholdSkill>();
 
         public HouseholdRobot(string robotName, double powerCapacityKWH, double currentPowerKWH)
             : base(robotName, powerCapacityKWH, currentPowerKWH)

@@ -19,10 +19,13 @@ namespace JanExam26
         public MainWindow()
         {
             InitializeComponent();
+            HouseholdRobot hr1 = new("HouseBot", 25, 25);
+            this.DataContext = hr1.DescribeRobot() ;
         }
 
         public void CreateRobots()
         {
+            List<Robot> robots = new List<Robot>();
             HouseholdRobot hr1 = new("HouseBot", 25, 25);
             HouseholdRobot hr2 = new("GardenMate", 25, 25);
             HouseholdRobot hr3 = new("Housemate 3000", 25, 25);
@@ -35,113 +38,44 @@ namespace JanExam26
             DeliveryRobot dr2 = new("FlyBot", 25, 25, Robot.DeliveryMode.Flying, 100);
             DeliveryRobot dr3 = new("Driver", 25, 25, Robot.DeliveryMode.Driving, 100);
 
+            robots.Add(hr1);
+            robots.Add(hr2);
+            robots.Add(hr3);
+            robots.Add(dr1);
+            robots.Add(dr2);
+            robots.Add(dr3);
+
+            
+
         }
+
+        private void ChargeButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Charged robot");
+        }
+
+        /*
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbxPosition.ItemsSource = Enum.GetValues(typeof(Position)).Cast<Position>();
+
+            Team t1 = new Team("Tigers");
+            Team t2 = new Team("Eagles");
+            Team t3 = new Team("Sharks");
+
+            teams.Add(t1);
+            teams.Add(t2);
+            teams.Add(t3);
+
+            lbxTeams.ItemsSource = teams;
+        }
+        */
+
     }
 
 
 
-    abstract class Robot
-    {
-        string RobotName { get; set; }
-        double PowerCapacityKWH { get; set; }
-        double CurrentPowerKWH { get; set; }
-
-        public Robot(string robotName, double powerCapacityKWH, double currentPowerKWH)
-        {
-            RobotName = robotName;
-            PowerCapacityKWH = powerCapacityKWH;
-            CurrentPowerKWH = currentPowerKWH;
-        }
-
-        public double GetBatteryPercentage()
-        {
-            double batteryPercentage = (CurrentPowerKWH / PowerCapacityKWH) * 100;
-
-            return batteryPercentage;
-        }
-
-        public string DisplayBatteryInformation()
-        {
-            return $"Battery Information\nCapacity: {PowerCapacityKWH} kWh\nCurrent Power: {CurrentPowerKWH} kWh\nBattery Level: {GetBatteryPercentage()}%";
-        }
-
-        public string ChargeRobot()
-        {
-            if(CurrentPowerKWH == PowerCapacityKWH)
-            {
-                return "Robot is already fully charged.";
-            }
-            double chargeTime = (100 - GetBatteryPercentage()) * 10 ;
-            CurrentPowerKWH = PowerCapacityKWH;
-
-            return $"Robot fully charged. Time taken: {chargeTime} mins";
-        }
-
-        public abstract string DescribeRobot();
-
-        public override string ToString()
-        {
-            return $"{RobotName}";
-        }
-
-        public enum HouseholdSkill { Cooking, Cleaning, Laundry, Gardening, ChildCare }
-        public enum DeliveryMode { Walking, Driving, Flying }
-    }
-
-    class HouseholdRobot : Robot
-    {
-        private List<HouseholdSkill>? Skills { get; set; }
-
-        public HouseholdRobot(string robotName, double powerCapacityKWH, double currentPowerKWH)
-            : base(robotName, powerCapacityKWH, currentPowerKWH)
-        {
-            DownloadSkill(HouseholdSkill.Cleaning);
-        }
-
-        public override string DescribeRobot()
-        {
-            string skills = "";
-            foreach (HouseholdSkill skill in Skills)
-            {
-                skills += skill.ToString() + "\n";
-            }
-            return $"I am a household robot.\nI can help with chores around the house.\n\nHousehold robot skills:\n{skills}\n{DisplayBatteryInformation()}";
-        }
-
-        public void DownloadSkill(HouseholdSkill skill)
-        {
-            Skills.Add(skill);
-
-        }
-
-
-    }
-
-    class DeliveryRobot : Robot
-    {
-        DeliveryMode ModeOfDelivery { get; set; }
-        double MaxLoadKG { get; set; }
-
-        public DeliveryRobot(string robotName, double powerCapacityKWH, double currentPowerKWH, DeliveryMode modeOfDelivery, double maxLoadKG)
-            : base(robotName, powerCapacityKWH, currentPowerKWH)
-        {
-            ModeOfDelivery = modeOfDelivery;
-            MaxLoadKG = maxLoadKG;
-        }
-
-
-        public override string DescribeRobot()
-        {
-            return $"I am a delivery robot.\n\nI specialize in delivery by {ModeOfDelivery}\n\nThe maximum load I can carry is {MaxLoadKG}\n\n{DisplayBatteryInformation()}";
-        }
-
-        
-
-
-
-
-
-    }
+    
    
 
 }
