@@ -11,9 +11,7 @@ using System.Windows.Shapes;
 
 namespace JanExam26
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    //Github Link - https://github.com/Fragg1e/JanExam26
     public partial class MainWindow : Window
     {
         public MainWindow()
