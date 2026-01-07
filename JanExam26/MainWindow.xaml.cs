@@ -54,22 +54,7 @@ namespace JanExam26
             MessageBox.Show("Charged robot");
         }
 
-        /*
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            cbxPosition.ItemsSource = Enum.GetValues(typeof(Position)).Cast<Position>();
-
-            Team t1 = new Team("Tigers");
-            Team t2 = new Team("Eagles");
-            Team t3 = new Team("Sharks");
-
-            teams.Add(t1);
-            teams.Add(t2);
-            teams.Add(t3);
-
-            lbxTeams.ItemsSource = teams;
-        }
-        */
+     
 
     }
 
